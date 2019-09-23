@@ -1,0 +1,34 @@
+ <html>
+    <head>
+        <title>Power</title>
+        <!-- Include the latest TensorFlow.js runtime -->
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    </head>
+    <body>
+        x: <input type="number" step="0.01" id="x"><br>
+        y: <input type="number" step="0.01" id="y"><br>
+        <button id="pow" name="pow">pow</button><br>
+        <div>
+            x<sup>y</sup>:&nbsp;<span id="x_to_y"></span>
+        </div>
+        <div>
+            y<sup>x</sup>:&nbsp;<span id="y_to_x"></span>
+        </div>
+
+        <script>
+            document.getElementById("pow").addEventListener("click", async function() {
+                // Load the model
+                const model = await tf.loadGraphModel("exported_js/model.json")
+                // Input Tensors
+                let x = tf.tensor1d([document.getElementById("x").value], dtype='float32')
+                let y = tf.tensor1d([document.getElementById("y").value], dtype='float32')
+                let results = model.execute({"x": x, "y": y})
+                let x_to_y = results[0].dataSync()
+                let y_to_x = results[1].dataSync()
+
+                document.getElementById("x_to_y").innerHTML = x_to_y
+                document.getElementById("y_to_x").innerHTML = y_to_x
+            });
+        </script>
+    </body>
+</html>
