@@ -40,8 +40,7 @@ With the following software and hardware list you can run all code files present
 
 | Chapter  | Software required                                     | OS required                        |
 | -------- | ------------------------------------------------------| -----------------------------------|
-| 1-10     | Python 3.7, Jupyter Notebook                          | Windows, Mac OS X, and Linux (Any) |
-| 7        | Python 3.7, Jupyter Notebook, IBM Watson              | Windows, Mac OS X, and Linux (Any) |
+| 3-10     | Python 3.6, Anaconda, TensorFlow 2.0                  | Windows, Mac OS X, and Linux (Any) |
 
 We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](https://static.packt-cdn.com/downloads/9781789615555_ColorImages.pdf).
 
