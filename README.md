@@ -34,7 +34,7 @@ writer.close()
 If you're a developer who wants to get started with machine learning and TensorFlow, or a data scientist interested in developing neural network solutions in TF 2.0, this book is for you. Experienced machine learning engineers who want to master the new features of the TensorFlow framework will also find this book useful.
 Basic knowledge of calculus and a strong understanding of Python programming will help you grasp the topics covered in this book.
 
-With the following software and hardware list you can run all code files present in the book (Chapter 1-11).
+With the following software and hardware list you can run all code files present in the book (Chapter 3-10).
 
 ### Software and Hardware List
 
