@@ -44,6 +44,10 @@ With the following software and hardware list you can run all code files present
 
 We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](https://static.packt-cdn.com/downloads/9781789615555_ColorImages.pdf).
 
+## Errata
+* Page 10 (Figure caption): **Venn diagram representing how a dataset should be divided no overlapping among the training, validation, and test sets is required** _should be_ **Venn diagram representing how a dataset should be divided; no overlap among the training, validation, and test sets is required**
+* Page 67 (Paragraph 3, line 7): **Convolution operations requires fewer parameters** _should be_ **Convolution operations require fewer parameters** 
+* Page 202 (Paragraph 6, line 1): **TensorFlow Hub is a library we can browse while a looking for a pre-trained model that best fits our needs** _should be_ **TensorFlow Hub is a library we can browse while looking for a pre-trained model that best fits our needs**
 
 ### Related products <Other books you may enjoy>
 * Hands-On Computer Vision with TensorFlow 2 [[Packt]](https://www.packtpub.com/application-development/hands-computer-vision-tensorflow-2?utm_source=github&utm_medium=repository&utm_campaign=9781788830645) [[Amazon]](https://www.amazon.com/dp/1788830644)
