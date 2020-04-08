@@ -3,17 +3,20 @@ from tensorflow.keras.datasets import fashion_mnist
 
 
 def make_model(n_classes):
-    return tf.keras.Sequential([
-        tf.keras.layers.Conv2D(
-            32, (5, 5), activation=tf.nn.relu, input_shape=(28, 28, 1)),
-        tf.keras.layers.MaxPool2D((2, 2), (2, 2)),
-        tf.keras.layers.Conv2D(64, (3, 3), activation=tf.nn.relu),
-        tf.keras.layers.MaxPool2D((2, 2), (2, 2)),
-        tf.keras.layers.Flatten(),
-        tf.keras.layers.Dense(1024, activation=tf.nn.relu),
-        tf.keras.layers.Dropout(0.5),
-        tf.keras.layers.Dense(n_classes)
-    ])
+    return tf.keras.Sequential(
+        [
+            tf.keras.layers.Conv2D(
+                32, (5, 5), activation=tf.nn.relu, input_shape=(28, 28, 1)
+            ),
+            tf.keras.layers.MaxPool2D((2, 2), (2, 2)),
+            tf.keras.layers.Conv2D(64, (3, 3), activation=tf.nn.relu),
+            tf.keras.layers.MaxPool2D((2, 2), (2, 2)),
+            tf.keras.layers.Flatten(),
+            tf.keras.layers.Dense(1024, activation=tf.nn.relu),
+            tf.keras.layers.Dropout(0.5),
+            tf.keras.layers.Dense(n_classes),
+        ]
+    )
 
 
 def load_data():
@@ -23,7 +26,7 @@ def load_data():
     train_x = (tf.image.convert_image_dtype(train_x, tf.float32) - 0.5) * 2
     train_y = tf.expand_dims(train_y, -1)
 
-    test_x = test_x / 255. * 2 - 1
+    test_x = test_x / 255.0 * 2 - 1
     test_x = (tf.image.convert_image_dtype(test_x, tf.float32) - 0.5) * 2
     test_y = tf.expand_dims(test_y, -1)
 
@@ -73,9 +76,7 @@ def train():
 
             loss_value, accuracy_value = train_step(features, labels)
             if t % 10 == 0:
-                print(
-                    f"{step.numpy()}: {loss_value} - accuracy: {accuracy_value}"
-                )
+                print(f"{step.numpy()}: {loss_value} - accuracy: {accuracy_value}")
         print(f"Epoch {epoch} terminated")
 
 

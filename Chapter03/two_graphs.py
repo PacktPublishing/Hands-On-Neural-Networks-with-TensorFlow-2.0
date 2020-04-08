@@ -1,4 +1,5 @@
 import tensorflow as tf
+
 g1 = tf.Graph()
 g2 = tf.Graph()
 with g1.as_default():

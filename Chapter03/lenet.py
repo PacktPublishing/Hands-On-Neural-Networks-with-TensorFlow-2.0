@@ -11,7 +11,7 @@ def define_cnn(x, n_classes, reuse, is_training):
     Returns:
         The output layer.
     """
-    with tf.variable_scope('cnn', reuse=reuse):
+    with tf.variable_scope("cnn", reuse=reuse):
         # Convolution Layer with 32 learneable filters 5x5 each
         # followed by max-pool operation that halves the spatial extent.
         conv1 = tf.layers.conv2d(x, 32, 5, activation=tf.nn.relu)
@@ -25,9 +25,7 @@ def define_cnn(x, n_classes, reuse, is_training):
         # Flatten the data to a 1D vector so we can use a fully connected layer.
         # Please note how the new shape is computed and how the negative dimension
         # in the batch size position.
-        shape = (
-            -1,
-            conv2.shape[1].value * conv2.shape[2].value * conv2.shape[3].value)
+        shape = (-1, conv2.shape[1].value * conv2.shape[2].value * conv2.shape[3].value)
         fc1 = tf.reshape(conv2, shape)
 
         # Fully connected layer
