@@ -1,5 +1,5 @@
-import tensorflow as tf
 import matplotlib.pyplot as plt
+import tensorflow as tf
 
 
 def sample_dataset():
@@ -62,6 +62,12 @@ bce = tf.keras.losses.BinaryCrossentropy(from_logits=True)
 def d_loss(d_real, d_fake):
     """The disciminator loss function."""
     return bce(tf.ones_like(d_real), d_real) + bce(tf.zeros_like(d_fake), d_fake)
+
+
+def g_loss(generated_output):
+    """The Generator loss function."""
+    bce = tf.keras.losses.BinaryCrossentropy(from_logits=True)
+    return bce(tf.ones_like(generated_output), generated_output)
 
 
 def train():
@@ -129,9 +135,6 @@ def train():
             axes = plt.gca()
             axes.set_xlim([-1, 11])
             axes.set_ylim([0, 60])
-            display.display(pl.gcf())
-            display.clear_output(wait=True)
-            plt.gca().clear()
 
 
 train()
