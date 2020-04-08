@@ -1,10 +1,11 @@
 import tensorflow as tf
-import tensorflow_datasets as tfds
 import tensorflow_hub as hub
+
+import tensorflow_datasets as tfds
 
 # Train, test, and validation are datasets for object detection: multiple objects per image.
 (train, test, validation), info = tfds.load(
-    "voc2007", split=["train", "test", "validation"], with_info=True
+    "voc/2007", split=["train", "test", "validation"], with_info=True
 )
 
 # Create a subset of the dataset by filtering the elements: we are interested
@@ -32,11 +33,13 @@ regression_head = tf.keras.layers.Dense(512)(net)
 regression_head = tf.keras.layers.ReLU()(regression_head)
 coordinates = tf.keras.layers.Dense(4, use_bias=False)(regression_head)
 
+regressor = tf.keras.Model(inputs=inputs, outputs=coordinates)
+
 # Classification head
 classification_head = tf.keras.layers.Dense(1024)(net)
-classification_head = tf.keras.layers.ReLU()(classificatio_head)
+classification_head = tf.keras.layers.ReLU()(classification_head)
 classification_head = tf.keras.layers.Dense(128)(net)
-classification_head = tf.keras.layers.ReLU()(classificatio_head)
+classification_head = tf.keras.layers.ReLU()(classification_head)
 num_classes = 20
 classification_head = tf.keras.layers.Dense(num_classes, use_bias=False)(
     classification_head
@@ -112,10 +115,12 @@ def draw(dataset, regressor, step):
         boxes = regressor(images)
 
         images = tf.image.draw_bounding_boxes(
-            images=images, boxes=tf.reshape(boxes, (-1, 1, 4))
+            images=images, boxes=tf.reshape(boxes, (-1, 1, 4)), colors=[(1.0, 0, 0, 0)]
         )
         images = tf.image.draw_bounding_boxes(
-            images=images, boxes=tf.reshape(obj["bbox"], (-1, 1, 4))
+            images=images,
+            boxes=tf.reshape(obj["bbox"], (-1, 1, 4)),
+            colors=[(1.0, 0, 0, 0)],
         )
         tf.summary.image("images", images, step=step)
 
@@ -162,7 +167,7 @@ with train_writer.as_default():
             loss = train_step(batch["image"], coordinates)
             tf.summary.scalar("loss", loss, step=global_step)
             global_step.assign_add(1)
-            if tf.equal(tf.mod(global_step, 10), 0):
+            if tf.equal(tf.math.mod(global_step, 10), 0):
                 tf.print("step ", global_step, " loss: ", loss)
                 with validation_writer.as_default():
                     draw(validation, regressor, global_step)
