@@ -68,7 +68,7 @@ def train():
     def loop():
         for features, labels in dataset:
             loss_value, accuracy_value = train_step(features, labels)
-            if tf.equal(tf.mod(step, 10), 0):
+            if tf.equal(tf.math.mod(step, 10), 0):
                 tf.print(step, ": ", loss_value, " - accuracy: ", accuracy_value)
 
     loop()

@@ -35,6 +35,23 @@ def get_input_fn(mode, batch_size=32, num_epochs=1):
     return input_fn
 
 
+def make_model(n_classes):
+    return tf.keras.Sequential(
+        [
+            tf.keras.layers.Conv2D(
+                32, (5, 5), activation=tf.nn.relu, input_shape=(28, 28, 1)
+            ),
+            tf.keras.layers.MaxPool2D((2, 2), (2, 2)),
+            tf.keras.layers.Conv2D(64, (3, 3), activation=tf.nn.relu),
+            tf.keras.layers.MaxPool2D((2, 2), (2, 2)),
+            tf.keras.layers.Flatten(),
+            tf.keras.layers.Dense(1024, activation=tf.nn.relu),
+            tf.keras.layers.Dropout(0.5),
+            tf.keras.layers.Dense(n_classes),
+        ]
+    )
+
+
 def model_fn(features, labels, mode):
     v1 = tf.compat.v1
     model = make_model(10)
