@@ -2,13 +2,10 @@ import tensorflow as tf
 
 
 class Generator(tf.keras.Model):
-
     def __init__(self):
         super(Generator, self).__init__()
-        self.dense_1 = tf.keras.layers.Dense(
-            units=64, activation=tf.nn.elu, name="fc1")
-        self.dense_2 = f.keras.layers.Dense(
-            units=64, activation=tf.nn.elu, name="fc2")
+        self.dense_1 = tf.keras.layers.Dense(units=64, activation=tf.nn.elu, name="fc1")
+        self.dense_2 = f.keras.layers.Dense(units=64, activation=tf.nn.elu, name="fc2")
         self.output = f.keras.layers.Dense(units=1, name="G")
 
     def call(self, inputs):

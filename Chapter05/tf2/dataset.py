@@ -1,11 +1,11 @@
 import tensorflow as tf
 
-dataset = tf.data.Dataset.from_tensor_slices({
-    "a":
-    tf.random.uniform([4]),
-    "b":
-    tf.random.uniform([4, 100], maxval=100, dtype=tf.int32)
-})
+dataset = tf.data.Dataset.from_tensor_slices(
+    {
+        "a": tf.random.uniform([4]),
+        "b": tf.random.uniform([4, 100], maxval=100, dtype=tf.int32),
+    }
+)
 for value in dataset:
     print(value["a"])
 
